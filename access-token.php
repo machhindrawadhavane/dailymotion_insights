@@ -76,7 +76,7 @@ function getAccessToken() {
                         $conn->query($sql6);
                         if (array_key_exists('uid',$token_arr)) {
                             curl_setopt_array($curl, array(
-                                CURLOPT_URL => "https://api.dailymotion.com/me/children?fields=id%2Cscreenname%2Cviews_total%2Cvideos_total%2Cfollowers_total",
+                                CURLOPT_URL => "https://api.dailymotion.com/me/children",
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_ENCODING => "",
                                 CURLOPT_MAXREDIRS => 10,
@@ -102,11 +102,11 @@ function getAccessToken() {
                                         $sql1 = "SELECT id FROM statuses WHERE ownerId='".$data['id']."'";
                                         $channel = $conn->query($sql1);
                                         if ($channel->num_rows > 0) {
-                                            $sql2="UPDATE statuses SET token = '".$token_arr['access_token']."', views_total = '".$data['views_total']."' , videos_total = '".$data['videos_total']."' , followers_total ='".$data['followers_total']."' WHERE ownerId='".$data['id']."'";
+                                            $sql2="UPDATE statuses SET token = '".$token_arr['access_token']."' WHERE ownerId='".$data['id']."'";
                                             $conn->query($sql2);
                                         }
                                         else {
-                                            $sql3 = "INSERT INTO `statuses`(pageName,ownerId,apiKey,apiSecret,token,userName,password,views_total,videos_total,followers_total) VALUES ('".$data['screenname']."','".$data['id']."','".$client_id."','".$client_secret."','".$token_arr['access_token']."','".$username."','".$password."','".$data['views_total']."','".$data['videos_total']."','".$data['followers_total']."')";
+                                            $sql3 = "INSERT INTO `statuses`(pageName,ownerId,apiKey,apiSecret,token,userName,password,views_total,videos_total,followers_total) VALUES ('".$data['screenname']."','".$data['id']."','".$client_id."','".$client_secret."','".$token_arr['access_token']."','".$username."','".$password."')";
                                             $conn->query($sql3);
                                         }
                                     }
