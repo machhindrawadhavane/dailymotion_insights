@@ -4,8 +4,8 @@ require_once 'db_connection.php';
 function getVideosDaily() {
     $access_token = $page_name = $owner_id = '';
     $available_format = $custom_classification = $geoblocking = $tags = $title = $created_time = $updated_time = '';
-    $created_after = '2020-04-02';
-    $created_before = '2020-04-10';
+    $created_after = date("Y-m-d", strtotime("- 7 day"));
+    $created_before = date("Y-m-d", strtotime("+ 1 day"));
     $conn = createConnection();
     
     $sql5 = "SELECT st.token, st.ownerId, st.pageName FROM statuses as st";

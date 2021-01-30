@@ -49,19 +49,14 @@ foreach ($tokens as $token) {
     
                 $sql1 = "SELECT id FROM videos WHERE video_id='".$data['id']."'";
                 $get_video = $conn->query($sql1);
-                // print_r($get_video->num_rows);
                 if ($get_video->num_rows > 0) {
                     $sql2="UPDATE videos SET views_total = '".$data['likes_total']."', likes_total = '".$data['likes_total']."' , audience_total = '".$data['audience_total']."' , views_last_day ='".$data['views_last_day']."', views_last_hour ='".$data['views_last_hour']."', views_last_month ='".$data['views_last_month']."', views_last_week ='".$data['views_last_week']."', custom_updated_date ='".$custom_imported_date."' WHERE video_id='".$data['id']."'";
                     $update_videos = $conn->query($sql2);
-                    print_r('updated---------------');
-                    print_r($data['id']);
                 }
                 else {
                     $sql = "INSERT INTO `videos`(video_id,title,url,views_total,likes_total,channel,advertising_instream_blocked,allow_embed,allowed_in_playlists,aspect_ratio,audience,audience_total,available_formats,checksum,country,created_time,custom_classification,duration,embed_html,embed_url,encoding_progress,end_time,expiry_date,expiry_date_deletion,explicit,filmstrip_60_url,geoblocking,geoloc,height,item_type,language,liked_at,live_ad_break_end_time,live_ad_break_remaining,live_airing_time,live_audio_bitrate,live_auto_record,live_ingests,live_publish_url,media_type,mode,onair,owner,partner,preview_240p_url,preview_360p_url,preview_480p_url,private,private_id,publish_date,published,publishing_progress,record_end_time,record_start_time,record_status,recurrence,status,tags,updated_time,verified,views_last_day,views_last_hour,views_last_month,views_last_week,width,page_name,custom_imported_date) 
                     VALUES ('".$data['id']."',N'".$title."','".$data['url']."','".$data['views_total']."','".$data['likes_total']."','".$data['channel']."','".$data['advertising_instream_blocked']."','".$data['allow_embed']."','".$data['allowed_in_playlists']."','".$data['aspect_ratio']."','".$data['audience']."','".$data['audience_total']."','".$available_format."','".$data['checksum']."','".$data['country']."','".$created_time."','".$custom_classification."','".$data['duration']."','".$data['embed_html']."','".$data['embed_url']."','".$data['encoding_progress']."','".$data['end_time']."','".$data['expiry_date']."','".$data['expiry_date_deletion']."','".$data['explicit']."','".$data['filmstrip_60_url']."','".$geoblocking."','".$data['geoloc']."','".$data['height']."','".$data['item_type']."','".$data['language']."','".$data['liked_at']."','".$data['live_ad_break_end_time']."','".$data['live_ad_break_remaining']."','".$data['live_airing_time']."','".$data['live_audio_bitrate']."','".$data['live_auto_record']."','".$data['live_ingests']['Default (recommended)']."','".$data['live_publish_url']."','".$data['media_type']."','".$data['mode']."','".$data['onair']."','".$data['owner']."','".$data['partner']."','".$data['preview_240p_url']."','".$data['preview_360p_url']."','".$data['preview_480p_url']."','".$data['private']."','".$data['private_id']."','".$data['publish_date']."','".$data['published']."','".$data['publishing_progress']."','".$data['record_end_time']."','".$data['record_start_time']."','".$data['record_status']."','".$data['recurrence']."','".$data['status']."','".$tags."','".$updated_time."','".$data['verified']."','".$data['views_last_day']."','".$data['views_last_hour']."','".$data['views_last_month']."','".$data['views_last_week']."','".$data['width']."','".$page_name."','".$custom_imported_date."')";
                     $result = $conn->query($sql);
-                    print_r('created-----------');
-                    print_r($data['id']);
                 }
             }
             $page = 0;
@@ -74,15 +69,10 @@ foreach ($tokens as $token) {
                 while ($has_more) {
                     $has_more = get_video_insights($page,$access_token,$conn, $page_name, $owner_id);
                     $page++;
-                    print_r('*********');
-                    print_r($has_more);
-                    print_r('***********');
                 }
             }
         }
     }
-    print_r($access_token);
-    print_r('----------');
 }
 
 //
@@ -118,7 +108,6 @@ function get_video_insights($page, $access_token, $conn, $page_name, $owner_id) 
                 $custom_classification = serialize($data['custom_classification']);
                 $geoblocking = serialize($data['geoblocking']);
                 $tags = serialize($data['tags']);
-                // $page_name = 'Marathi';
                 $custom_imported_date = date("Y-m-d H:i:s");
                 $created_time = date('Y-m-d H:i:s', $data['created_time']);
                 $updated_time = date('Y-m-d H:i:s', $data['updated_time']);
@@ -127,19 +116,14 @@ function get_video_insights($page, $access_token, $conn, $page_name, $owner_id) 
                 }
                 $sql3 = "SELECT id FROM videos WHERE video_id='".$data['id']."'";
                 $get_video = $conn->query($sql3);
-                // print_r($get_video->num_rows);
                 if ($get_video->num_rows > 0) {
                     $sql4="UPDATE videos SET views_total = '".$data['likes_total']."', likes_total = '".$data['likes_total']."' , audience_total = '".$data['audience_total']."' , views_last_day ='".$data['views_last_day']."', views_last_hour ='".$data['views_last_hour']."', views_last_month ='".$data['views_last_month']."', views_last_week ='".$data['views_last_week']."', custom_updated_date ='".$custom_imported_date."' WHERE video_id='".$data['id']."'";
                     $update_videos = $conn->query($sql4);
-                    print_r('updated-----------');
-                    print_r($data['id']);
                 }
                 else {
                     $sql5 = "INSERT INTO `videos`(video_id,title,url,views_total,likes_total,channel,advertising_instream_blocked,allow_embed,allowed_in_playlists,aspect_ratio,audience,audience_total,available_formats,checksum,country,created_time,custom_classification,duration,embed_html,embed_url,encoding_progress,end_time,expiry_date,expiry_date_deletion,explicit,filmstrip_60_url,geoblocking,geoloc,height,item_type,language,liked_at,live_ad_break_end_time,live_ad_break_remaining,live_airing_time,live_audio_bitrate,live_auto_record,live_ingests,live_publish_url,media_type,mode,onair,owner,partner,preview_240p_url,preview_360p_url,preview_480p_url,private,private_id,publish_date,published,publishing_progress,record_end_time,record_start_time,record_status,recurrence,status,tags,updated_time,verified,views_last_day,views_last_hour,views_last_month,views_last_week,width,page_name,custom_imported_date) 
                     VALUES ('".$data['id']."',N'".$title."','".$data['url']."','".$data['views_total']."','".$data['likes_total']."','".$data['channel']."','".$data['advertising_instream_blocked']."','".$data['allow_embed']."','".$data['allowed_in_playlists']."','".$data['aspect_ratio']."','".$data['audience']."','".$data['audience_total']."','".$available_format."','".$data['checksum']."','".$data['country']."','".$created_time."','".$custom_classification."','".$data['duration']."','".$data['embed_html']."','".$data['embed_url']."','".$data['encoding_progress']."','".$data['end_time']."','".$data['expiry_date']."','".$data['expiry_date_deletion']."','".$data['explicit']."','".$data['filmstrip_60_url']."','".$geoblocking."','".$data['geoloc']."','".$data['height']."','".$data['item_type']."','".$data['language']."','".$data['liked_at']."','".$data['live_ad_break_end_time']."','".$data['live_ad_break_remaining']."','".$data['live_airing_time']."','".$data['live_audio_bitrate']."','".$data['live_auto_record']."','".$data['live_ingests']['Default (recommended)']."','".$data['live_publish_url']."','".$data['media_type']."','".$data['mode']."','".$data['onair']."','".$data['owner']."','".$data['partner']."','".$data['preview_240p_url']."','".$data['preview_360p_url']."','".$data['preview_480p_url']."','".$data['private']."','".$data['private_id']."','".$data['publish_date']."','".$data['published']."','".$data['publishing_progress']."','".$data['record_end_time']."','".$data['record_start_time']."','".$data['record_status']."','".$data['recurrence']."','".$data['status']."','".$tags."','".$updated_time."','".$data['verified']."','".$data['views_last_day']."','".$data['views_last_hour']."','".$data['views_last_month']."','".$data['views_last_week']."','".$data['width']."','".$page_name."','".$custom_imported_date."')";
                     $result = $conn->query($sql5);
-                    print_r('created-----------------');
-                    print_r($data['id']);
                 }
             }
             $has_more = $video_data['has_more'];

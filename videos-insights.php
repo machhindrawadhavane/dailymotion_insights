@@ -4,8 +4,8 @@ require_once 'db_connection.php';
 function getVideosDetails() {
     $access_token = $page_name = $owner_id = '';
     $available_format = $custom_classification = $geoblocking = $tags = $title = $created_time = $updated_time = '';
-    $created_after = '2020-04-08';
-    $created_before = '2020-04-09';
+    $created_after = date("Y-m-d");
+    $created_before = date("Y-m-d", strtotime("+ 1 day"));
     $conn = createConnection();
     
     $sql5 = "SELECT st.token, st.ownerId, st.pageName FROM statuses as st";
@@ -154,8 +154,6 @@ function getVideosDetails() {
                     $custom_imported_date = date("Y-m-d H:i:s");
                     if (array_key_exists('created_time',$data)) {
                         $created_time = date('Y-m-d H:i:s', $data['created_time']);
-                        print_r('-------');
-                        print_r($created_time);
                     }
                     if (array_key_exists('updated_time',$data)) {
                         $updated_time = date('Y-m-d H:i:s', $data['updated_time']);

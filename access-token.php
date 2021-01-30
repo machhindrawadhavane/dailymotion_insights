@@ -106,7 +106,7 @@ function getAccessToken() {
                                             $conn->query($sql2);
                                         }
                                         else {
-                                            $sql3 = "INSERT INTO `statuses`(pageName,ownerId,apiKey,apiSecret,token,userName,password,views_total,videos_total,followers_total) VALUES ('".$data['screenname']."','".$data['id']."','".$client_id."','".$client_secret."','".$token_arr['access_token']."','".$username."','".$password."')";
+                                            $sql3 = "INSERT INTO `statuses`(pageName,ownerId,apiKey,apiSecret,token,userName,password) VALUES ('".$data['screenname']."','".$data['id']."','".$client_id."','".$client_secret."','".$token_arr['access_token']."','".$username."','".$password."')";
                                             $conn->query($sql3);
                                         }
                                     }
